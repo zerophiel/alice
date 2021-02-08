@@ -2,6 +2,7 @@ FROM openjdk:15.0.1-jdk-slim as builder
 RUN mkdir -p /app/src
 COPY . /app/src
 WORKDIR /app/src
+RUN chmod +x mvnw
 RUN ./mvnw clean package
 
 FROM openjdk:15.0.1-jdk-slim as runtime
