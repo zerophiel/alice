@@ -16,12 +16,13 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = AnggaranControllerPath.BASE_PATH)
 public class AnggaranController {
     @Autowired
     AnggaranService anggaranService;
 
-    @RequestMapping(value = AnggaranControllerPath.CREATE,method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse createNewAnggaran(@RequestBody CreateAnggaranRequest request) throws Exception {
         Precondition.checkArgument(!ObjectUtils.isEmpty(request.getId_anggaran()), ErrorMessage.ERR_ITEM_NAME_MUST_NOT_BE_BLANK);
         Precondition.checkArgument(!ObjectUtils.isEmpty(request.getId_opd()), ErrorMessage.ERR_ITEM_NAME_MUST_NOT_BE_BLANK);
@@ -30,7 +31,7 @@ public class AnggaranController {
         return new BaseResponse(null,null,true);
     }
 
-    @RequestMapping(value = AnggaranControllerPath.DELETE,method = RequestMethod.DELETE,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.DELETE,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse deleteAnggaran(@RequestParam Long id, @RequestBody DeleteAnggaranRequest request) throws Exception {
         Precondition.checkArgument(!ObjectUtils.isEmpty(id),ErrorMessage.ERR_DATA_NOT_FOUND);
         Precondition.checkArgument((request.getId().equals(id)),ErrorMessage.ERR_DATA_NOT_FOUND);
@@ -38,7 +39,7 @@ public class AnggaranController {
         return new BaseResponse(null,null,true);
     }
 
-    @RequestMapping(value = AnggaranControllerPath.UPDATE,method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public BaseResponse updateAnggaran (@RequestParam Long id, @RequestBody UpdateAnggaranRequest request) throws Exception {
         Precondition.checkArgument(!ObjectUtils.isEmpty(id),ErrorMessage.ERR_DATA_NOT_FOUND);
         Precondition.checkArgument((request.getId().equals(id)),ErrorMessage.ERR_DATA_NOT_FOUND);
@@ -49,7 +50,7 @@ public class AnggaranController {
         return new BaseResponse(null,null,true);
     }
 
-    @RequestMapping(value = AnggaranControllerPath.READ,method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public ListBaseResponse readAnggaran () throws Exception{
         return new ListBaseResponse(null,null,true,this.anggaranService.findAll(),new Metadata());
     }
