@@ -16,8 +16,12 @@ services:
     restart: always
     ports:
     - 8080:8080
+    depends_on:
+      - db
   frontend:
     image: zerophiel/nemesis:latest
     restart: always
     ports:
     - 80:80
+    depends_on:
+      - app
