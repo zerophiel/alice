@@ -16,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = AnggaranControllerPath.BASE_PATH)
 public class AnggaranController {
     @Autowired
